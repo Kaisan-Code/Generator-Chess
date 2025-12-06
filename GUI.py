@@ -22,6 +22,8 @@ class gui():
 
         self.piece_symbols = {"w": {"P": "\u2659", "N": "\u2658", "B": "\u2657", "R": "\u2656", "Q": "\u2655", "K": "\u2654"},
                               "b": {"P": "\u265F", "N": "\u265E", "B": "\u265D", "R": "\u265C", "Q": "\u265B", "K": "\u265A"}}
+        
+        self.update = False
 
         self.root = root
 
@@ -93,8 +95,8 @@ class gui():
 
             my_frame.grid(row=row, column=column, sticky="nesw")
         
-        #Board Colours
-        self.piece_size = tkfont.Font(size=30)
+        #Board Colours + Piece size
+        self.piece_size = tkfont.Font(size=35)
         
         style_white = ttk.Style(self.root)
         style_white.configure("White.TButton", font=self.piece_size, background="#FFFFFF")
