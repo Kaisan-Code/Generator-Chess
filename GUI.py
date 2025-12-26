@@ -57,11 +57,23 @@ class gui():
             symbol = self.get_symbol(piece, colour)
 
             button.config(text=symbol)
+        
+        w_total = self.engine.TotalW
+        b_total = self.engine.TotalB
+        
+        if w_total > b_total:
+            self.labels[1].config(text=f"Player 1       +{w_total - b_total}")
+            self.labels[0].config(text="Player 2")
+        elif w_total == b_total:
+            self.labels[1].config(text="Player 1")
+            self.labels[0].config(text="Player 2")
+        else:
+            self.labels[0].config(text=f"Player 2       +{b_total - w_total}")
+            self.labels[1].config(text="Player 1")
     
 
     def piece_clicked(self, var):
             self.engine.move_piece(var)
-            self._update_board()
     
 
     def create_widgets(self):
@@ -71,11 +83,15 @@ class gui():
         label_style = ttk.Style(self.root)
         label_style.configure("Style.TLabel", font=label_font)
 
-        p1_label = ttk.Label(self.root, text="Player 2", style="Style.TLabel")
-        p1_label.grid(row=0, column=1)
+        self.labels = []
 
-        p2_label = ttk.Label(self.root, text="Player 1", style="Style.TLabel")
-        p2_label.grid(row=2, column=1)
+        p2_label = ttk.Label(self.root, text="Player 2", style="Style.TLabel")
+        self.labels.append(p2_label)
+        p2_label.grid(row=0, column=1)
+
+        p1_label = ttk.Label(self.root, text="Player 1", style="Style.TLabel")
+        self.labels.append(p1_label)
+        p1_label.grid(row=2, column=1)
 
         #Board frame
         frame1 = ttk.Frame(self.root)
